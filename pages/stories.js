@@ -1,10 +1,15 @@
+import Story from "../components/Story.js"
 import view from "../utils/view.js"
 
 export default async function Stories(path) {
     const stories = await getStories(path)
     const hasStories = stories.length > 0
     view.innerHTML = `<div>
-        ${hasStories ? stories.map((storie) => JSON.stringify(storie)) : "No stories"}
+        ${
+            hasStories
+                ? stories.map((story, i) => Story({ ...story, index: i + 1 })).join("")
+                : "No stories"
+        }
     </div>`
 }
 
